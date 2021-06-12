@@ -1,0 +1,81 @@
+<app-detail-producto *ngIf="productoSeleccionado" [producto]="productoSeleccionado"></app-detail-producto>
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>{{title}}</h1>
+                <br>
+                <a [routerLink]="['/productos/create']" class="btn bg-gradient-success">
+                    <i class="fas fa-plus-circle"></i>
+                    Nuevo
+                </a>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+<div class="card">
+    <div class="card-header">
+        Listado de Tipos de Identificación
+    </div>
+    <div class="card-body table-responsive">
+        <table id="productos" class="table table-hover table-striped table-bordered dataTable dtr-inline table-sm" role="grid">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let producto of productos">
+                    <td>
+                        <img (click)="abrirModal(producto)" *ngIf="producto?.imagen"
+                            src="http://localhost:8281/api/uploads/img/{{producto.imagen}}" alt="{{producto.imagen}}"
+                            class="img-thumbnail rounded" style="width: 45px; height: 48px; cursor: pointer;">
+
+                        <img (click)="abrirModal(producto)" *ngIf="!producto?.imagen"
+                            src="http://localhost:8281/images/no-image.jpg" alt="{{producto.imagen}}"
+                            class="img-thumbnail rounded" style="width: 45px; height: 48px; cursor: pointer;">
+                    </td>
+                    <td>{{producto.codProducto}}</td>
+                    <td>{{producto.nombre}}</td>
+                    <td>{{producto.precioVenta}}</td>
+                    <td>{{producto.tipoProducto.tipoProducto}}</td>
+                    <td>{{producto.marcaProducto.marca}}</td>
+                    <td>{{producto.estado.estado}}</td>
+                    <td class="center-options">
+                        <button class="btn bg-gradient-info btn-sm margin" data-toggle="tooltip" data-placement="top" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+
+                        <button class="btn bg-gradient-danger btn-sm margin" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+
+            <tfoot>
+                <tr>
+                    <th>#</th>
+                    <th>Codigo</th>
+                    <th>Nombre</th>
+                    <th>Precio</th>
+                    <th>Tipo</th>
+                    <th>Marca</th>
+                    <th>Estado</th>
+                    <th>Opciones</th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
