@@ -50,13 +50,18 @@
                     <td>{{producto.precioVenta}}</td>
                     <td>{{producto.tipoProducto.tipoProducto}}</td>
                     <td>{{producto.marcaProducto.marca}}</td>
-                    <td>{{producto.estado.estado}}</td>
+                    <td>
+                        <span class="badge"
+                            [ngClass]="{'badge-primary': producto.estado.estado === 'ACTIVO', 'badge-danger': producto.estado.estado === 'INACTIVO'}">
+                            {{producto.estado.estado}}
+                        </span>
+                    </td>
                     <td class="center-options">
-                        <button class="btn bg-gradient-info btn-sm margin" data-toggle="tooltip" data-placement="top" title="Editar">
+                        <button class="btn bg-gradient-info margin" [routerLink]="['/productos/create', producto.idProducto]">
                             <i class="fas fa-edit"></i>
                         </button>
 
-                        <button class="btn bg-gradient-danger btn-sm margin" data-toggle="tooltip" data-placement="top" title="Eliminar">
+                        <button class="btn bg-gradient-danger margin">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>

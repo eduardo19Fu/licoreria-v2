@@ -14,28 +14,49 @@ import { FacturasComponent } from './components/facturas/facturas.component';
 import { CreateFacturaComponent } from './components/facturas/create-factura/create-factura.component';
 import { CorrelativosComponent } from './components/correlativos/correlativos.component';
 import { CreateCorrelativoComponent } from './components/correlativos/create-correlativo/create-correlativo.component';
+import { ClientesComponent } from './components/clientes/clientes.component';
+import { CreateClienteComponent } from './components/clientes/create-cliente/create-cliente.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
+
+import { AuthGuard } from './components/usuarios/guards/auth.guard';
+import { RoleGuard } from './components/usuarios/guards/role.guard';
 
 const appRoutes: Routes = [
     {path: '', component: LoginComponent},
     {path: 'login', component: LoginComponent},
-    {path: 'home', component: HomeComponent},
+    {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
 
     /****** MENUS DE PRODUCTOS ******/
-    {path: 'productos/index', component: ProductosComponent},
-    {path: 'productos/create', component: CreateProductoComponent},
-    {path: 'productos/create/:id', component: CreateProductoComponent},
-    {path: 'productos/marcas/index', component: MarcasProductoComponent},
-    {path: 'productos/marcas/create', component: CreateMarcaComponent},
-    {path: 'productos/marcas/create/:id', component: CreateMarcaComponent},
-    {path: 'productos/categorias/index', component: TiposProductoComponent},
-    {path: 'productos/categorias/create', component: CreateTipoComponent},
-    {path: 'productos/categorias/create/:id', component: CreateTipoComponent},
+    {path: 'productos/index', component: ProductosComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/create', component: CreateProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/create/:id', component: CreateProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/marcas/index', component: MarcasProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/marcas/create', component: CreateMarcaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/marcas/create/:id', component: CreateMarcaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/categorias/index', component: TiposProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/categorias/create', component: CreateTipoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/categorias/create/:id', component: CreateTipoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
 
     /****** MENUS DE FACTURAS ******/
-    {path: 'facturas/index', component: FacturasComponent},
-    {path: 'facturas/create', component: CreateFacturaComponent},
-    {path: 'facturas/correlativos/index', component: CorrelativosComponent},
-    {path: 'facturas/correlativos/create', component: CreateCorrelativoComponent},
+    // tslint:disable-next-line: max-line-length
+    {path: 'facturas/index', component: FacturasComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_COBRADOR']}},
+    {path: 'facturas/create', component: CreateFacturaComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_COBRADOR']}},
+    // tslint:disable-next-line: max-line-length
+    {path: 'facturas/correlativos/index', component: CorrelativosComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+    {path: 'facturas/correlativos/create', component: CreateCorrelativoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+    {path: 'facturas/correlativos/create/:id', component: CreateCorrelativoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+
+    /****** MENUS DE CLIENTES ******/
+    // tslint:disable-next-line: max-line-length
+    {path: 'clientes/index', component: ClientesComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_COBRADOR']}},
+    {path: 'clientes/create', component: CreateClienteComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_COBRADOR']}},
+    {path: 'clientes/create/:id', component: CreateClienteComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_COBRADOR']}},
+
+    /****** MENUS DE USUARIOS ******/
+    {path: 'usuarios/index', component: UsuariosComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+    {path: 'usuarios/create', component: CreateUsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
+    {path: 'usuarios/create/:id', component: CreateUsuarioComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN']}},
 
     {path: '**', component: ErrorComponent}
 ];

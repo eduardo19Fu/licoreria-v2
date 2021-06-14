@@ -20,9 +20,11 @@ export class JqueryConfigs {
     // MÉTODO DE INICIALIZACION DE TOOLTIPS
     configToolTip(): void {
         $(() => {
-            $('[data-toggle="tooltip"]').tooltip();
-        });
+            $('[data-toggle="tooltip"]').tooltip({
+                trigger: 'hover'
+            });
 
-        $.widget.bridge('uibutton', $.ui.button);
+            $.widget.bridge('uibutton', $.ui.button)
+        });
     }
 }
