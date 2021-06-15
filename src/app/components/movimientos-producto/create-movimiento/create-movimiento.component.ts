@@ -66,6 +66,7 @@ export class CreateMovimientoComponent implements OnInit, AfterViewInit {
 
   create(): void {
     this.movimientoProducto.producto = this.producto;
+    this.movimientoProducto.usuario = this.usuario;
     if (this.movimientoProducto.producto) {
       // tslint:disable-next-line: max-line-length
       if (this.movimientoProducto.producto.stock >= this.movimientoProducto.cantidad || this.movimientoProducto.tipoMovimiento === 'ENTRADA') {

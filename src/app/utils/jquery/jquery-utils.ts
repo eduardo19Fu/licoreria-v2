@@ -11,8 +11,11 @@ export class JqueryConfigs {
     configDataTable(nombreTabla: string): void {
         $(() => {
             $(`#${nombreTabla}`).DataTable({
-                responsive: true, lengthChange: true, autoWidth: false,
-                buttons: ['csv', 'excel']
+                destroy : true,
+                responsive: true,
+                lengthChange: true,
+                autoWidth: false,
+                buttons: ['excel']
             }).buttons().container().appendTo('#' + nombreTabla + '_wrapper .col-md-6:eq(0)');
         });
     }

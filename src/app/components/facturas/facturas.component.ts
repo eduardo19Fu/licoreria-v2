@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, AfterViewInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
@@ -16,7 +16,7 @@ import swal from 'sweetalert2';
   templateUrl: './facturas.component.html',
   styleUrls: ['./facturas.component.css']
 })
-export class FacturasComponent implements OnInit {
+export class FacturasComponent implements OnInit, AfterViewInit {
 
   title: string;
 
@@ -25,6 +25,8 @@ export class FacturasComponent implements OnInit {
   usuario: Usuario;
   facturaSeleccionada: Factura;
   jQueryConfigs: JqueryConfigs;
+
+  private notificarAnulacion: EventEmitter<any>;
 
   swalWithBootstrapButtons = swal.mixin({
     customClass: {
@@ -49,12 +51,14 @@ export class FacturasComponent implements OnInit {
     this.getFacturas();
   }
 
+  ngAfterViewInit(): void{
+  }
+
   getFacturas(): void {
     this.facturaService.getFacturas().subscribe(
       facturas => {
-        this.facturas = facturas;
         this.jQueryConfigs.configDataTable('facturas');
-        this.jQueryConfigs.configToolTip();
+        this.facturas = facturas;
       }
     );
   }
@@ -86,6 +90,13 @@ export class FacturasComponent implements OnInit {
             );
           }
         );
+
+        this.facturas.map(facturaVieja => {
+          if (facturaVieja.idFactura === factura.idFactura) {
+            facturaVieja.estado = factura.estado;
+          }
+          return factura;
+        });
 
       } else if (
         /* Read more about handling dismissals below */

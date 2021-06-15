@@ -18,37 +18,20 @@
                             <button class="btn bg-gradient-fuchsia" (click)="buscarProducto()">
                                 <i class="fas fa-search"></i>
                             </button>
-                            
-                            <div *ngIf="codigo.invalid && (codigo.touched || codigo.dirty)">
-                                <span class="requerido">
-                                    Ingrese un código para realizar la búsqueda.
-                                </span>
-                            </div>
 
                         </div>
 
                         <div class="form-group col-lg-7">
                             <label for="nombre">Producto</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" [(ngModel)]="producto.nombre"
-                                required #nombre="ngModel" [disabled]="producto.nombre">
-
-                            <div *ngIf="nombre.invalid && (nombre.touched || nombre.dirty)">
-                                <span class="requerido">
-                                    Realice la búsqueda del producto.
-                                </span>
-                            </div>
+                            <input type="text" class="form-control" name="nombre" id="nombre" value="{{producto.nombre ? producto.nombre : ''}}"
+                                required [disabled]="producto.nombre">
                         </div>
 
                         <div class="form-group col-sm-2">
                             <label for="stock">Disponible</label>
-                            <input type="number" class="form-control" name="stock" id="stock" [(ngModel)]="producto.stock"
-                                required #stock="ngModel" [disabled]="producto.stock">
+                            <input type="number" class="form-control" name="stock" id="stock" value="{{producto.stock ? producto.stock : ''}}"
+                                required [disabled]="producto.stock">
 
-                            <div *ngIf="stock.invalid && (stock.touched || stock.dirty)">
-                                <span class="requerido">
-                                    Realice la búsqueda del producto.
-                                </span>
-                            </div>
                         </div>
                     </div>
 
