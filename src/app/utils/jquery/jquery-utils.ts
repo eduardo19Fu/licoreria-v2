@@ -24,7 +24,26 @@ export class JqueryConfigs {
                 trigger: 'hover'
             });
 
-            $.widget.bridge('uibutton', $.ui.button)
+            $.widget.bridge('uibutton', $.ui.button);
+        });
+    }
+
+    configSelect(): void {
+        $(() => {
+            // Initialize Select2 Elements
+            $('.select2').select2();
+
+            // Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            });
+        });
+    }
+
+    hideModal(): void {
+        $('#modal-movimiento').on('hidden.bs.modal', (e) => {
+
+            $('#form-movimiento').find('input[type=text], input[type=number], select').val('');
         });
     }
 }

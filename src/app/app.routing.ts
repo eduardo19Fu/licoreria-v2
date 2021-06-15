@@ -21,6 +21,8 @@ import { CreateUsuarioComponent } from './components/usuarios/create-usuario/cre
 
 import { AuthGuard } from './components/usuarios/guards/auth.guard';
 import { RoleGuard } from './components/usuarios/guards/role.guard';
+import { MovimientosProductoComponent } from './components/movimientos-producto/movimientos-producto.component';
+import { CreateMovimientoComponent } from './components/movimientos-producto/create-movimiento/create-movimiento.component';
 
 const appRoutes: Routes = [
     {path: '', component: LoginComponent},
@@ -37,6 +39,8 @@ const appRoutes: Routes = [
     {path: 'productos/categorias/index', component: TiposProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
     {path: 'productos/categorias/create', component: CreateTipoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
     {path: 'productos/categorias/create/:id', component: CreateTipoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/inventario/index', component: MovimientosProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/inventario/create', component: CreateMovimientoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
 
     /****** MENUS DE FACTURAS ******/
     // tslint:disable-next-line: max-line-length

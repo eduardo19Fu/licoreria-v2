@@ -5,6 +5,7 @@ export class MovimientoProducto {
     idMovimiento: number;
     tipoMovimiento: string;
     cantidad: number;
+    stockInicial: number;
     fechaMovimiento: Date;
 
     producto: Producto;

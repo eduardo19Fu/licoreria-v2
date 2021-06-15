@@ -20,7 +20,18 @@
         Listado de Tipos de Identificación
     </div>
     <div class="card-body table-responsive">
-        <table id="productos" class="table table-hover table-striped table-bordered dataTable dtr-inline table-sm" role="grid">
+
+        <div *ngIf="productos?.length == 0" class="alert alert-info alert-dismissible">
+            <h5>
+                <i class="icon fas fa-info"></i>
+                Atención!
+            </h5>
+
+            No existe ningún producto registrado en la base de datos!
+        </div>
+
+        <table id="productos" class="table table-hover table-striped table-bordered dataTable dtr-inline table-sm" role="grid"
+            *ngIf="productos?.length > 0">
             <thead>
                 <tr>
                     <th>#</th>
