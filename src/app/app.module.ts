@@ -32,6 +32,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateUsuarioComponent } from './components/usuarios/create-usuario/create-usuario.component';
 import { DetailUsuarioComponent } from './components/usuarios/detail-usuario/detail-usuario.component';
 import { ErrorComponent } from './components/error/error.component';
+import { MovimientosProductoComponent } from './components/movimientos-producto/movimientos-producto.component';
+import { CreateMovimientoComponent } from './components/movimientos-producto/create-movimiento/create-movimiento.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,9 @@ import { ErrorComponent } from './components/error/error.component';
     UsuariosComponent,
     CreateUsuarioComponent,
     DetailUsuarioComponent,
-    ErrorComponent
+    ErrorComponent,
+    MovimientosProductoComponent,
+    CreateMovimientoComponent
   ],
   imports: [
     BrowserModule,

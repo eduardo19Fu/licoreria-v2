@@ -22,7 +22,18 @@
         Listado de Tipos de Identificación
     </div>
     <div class="card-body table-responsive">
-        <table id="facturas" class="table table-hover table-striped table-bordered dataTable dtr-inline table-sm" role="grid">
+
+        <div *ngIf="facturas?.length == 0" class="alert alert-info alert-dismissible">
+            <h5>
+                <i class="icon fas fa-info"></i>
+                Atención!
+            </h5>
+
+            No existe ninguna factura registrada en la base de datos!
+        </div>
+
+        <table id="facturas" class="table table-hover table-striped table-bordered dataTable dtr-inline table-sm" role="grid"
+            *ngIf="facturas?.length > 0">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -39,7 +50,7 @@
                 <tr *ngFor="let factura of facturas">
                     <td>{{factura.idFactura}}</td>
                     <td>{{factura.noFactura}}</td>
-                    <td>{{factura.fechaRegistro | date: 'dd/MM/yyyy - hh:mm'}}</td>
+                    <td>{{factura.fecha | date: 'dd/MM/yyyy - hh:mm'}}</td>
                     <td>{{factura.total}}</td>
                     <td>
                         <span class="badge" 

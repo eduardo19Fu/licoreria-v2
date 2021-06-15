@@ -46,8 +46,8 @@ export class FacturaService {
     );
   }
 
-  cancel(id: number): Observable<any>{
-    return this.http.delete<any>(`${this.url}/facturas/cancel/${id}`).pipe(
+  cancel(id: number, idusuario: number): Observable<any>{
+    return this.http.delete<any>(`${this.url}/facturas/cancel/${id}/${idusuario}`).pipe(
       catchError(e => {
         swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);

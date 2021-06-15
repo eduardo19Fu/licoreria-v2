@@ -6,9 +6,10 @@ import { DetailService } from 'src/app/services/facturas/detail.service';
 import { FacturaService } from 'src/app/services/facturas/factura.service';
 
 import { Factura } from 'src/app/models/factura';
+import { Usuario } from 'src/app/models/usuario';
 
-import swal from 'sweetalert2';
 import { JqueryConfigs } from '../../utils/jquery/jquery-utils';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-facturas',
@@ -21,6 +22,7 @@ export class FacturasComponent implements OnInit {
 
   facturas: Factura[];
 
+  usuario: Usuario;
   facturaSeleccionada: Factura;
   jQueryConfigs: JqueryConfigs;
 
@@ -40,6 +42,7 @@ export class FacturasComponent implements OnInit {
   ) {
     this.title = 'Facturas';
     this.jQueryConfigs = new JqueryConfigs();
+    this.usuario = auth.usuario;
   }
 
   ngOnInit(): void {
@@ -74,9 +77,8 @@ export class FacturasComponent implements OnInit {
       if (result.isConfirmed) {
 
         // aqui va el codigo de confirmación para anular factura
-        this.facturaService.cancel(factura.idFactura).subscribe(
+        this.facturaService.cancel(factura.idFactura, this.usuario.idUsuario).subscribe(
           response => {
-            this.facturas = this.facturas.filter(fac => factura.noFactura !== fac.noFactura);
             this.swalWithBootstrapButtons.fire(
               `${response.mensaje}`,
               `La factura No. ${factura.noFactura} ha sido anulada con éxito`,
