@@ -1,6 +1,4 @@
-
-declare const $;
-
+declare const $: any;
 // tslint:disable-next-line: no-string-literal
 window['$'] = window['jQuery'] = $;
 
@@ -15,7 +13,18 @@ export class JqueryConfigs {
                 responsive: true,
                 lengthChange: true,
                 autoWidth: false,
-                buttons: ['excel']
+                buttons: ['excel'],
+                language: {
+                    lengthMenu : 'Mostrar _MENU_ registros',
+                    paginate: {
+                        first: 'Primero',
+                        last: 'Último',
+                        next: 'Siguiente',
+                        previous: 'Anterior'
+                    },
+                    search: 'Búsqueda:',
+                    info: 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros'
+                }
             }).buttons().container().appendTo('#' + nombreTabla + '_wrapper .col-md-6:eq(0)');
         });
     }

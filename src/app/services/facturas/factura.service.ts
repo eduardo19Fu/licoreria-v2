@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -60,6 +60,22 @@ export class FacturaService {
       catchError(e => {
         swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
+      })
+    );
+  }
+
+  /*********** FACTURA PDF **************/
+  getBillPDF(idfactura: number): Observable<any>{
+    const headers = new HttpHeaders();
+    headers.append('Accept', 'application/pdf');
+    const requestOptions: any = { headers, responseType: 'blob' };
+
+    return this.http.get<any>(`${this.url}/facturas/generate/${idfactura}`, requestOptions).pipe(
+      map((response: any) => {
+        return{
+          filename: 'factura.pdf',
+          data: new Blob([response], { type: 'application/pdf' })
+        };
       })
     );
   }

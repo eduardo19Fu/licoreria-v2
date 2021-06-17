@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
@@ -23,11 +23,11 @@ export class MovimientosProductoService {
     this.url = global.url;
   }
 
-  getMovimientosProducto(): Observable<MovimientoProducto[]>{
+  getMovimientosProducto(): Observable<MovimientoProducto[]> {
     return this.http.get<MovimientoProducto[]>(`${this.url}/movimientos`);
   }
 
-  getMovimientosProductoPage(idproducto: number, page: number): Observable<any>{
+  getMovimientosProductoPage(idproducto: number, page: number): Observable<any> {
     return this.http.get<any>(`${this.url}/movimientos/${idproducto}/${page}`).pipe(
       map((response: any) => {
         (response.content as MovimientoProducto[]).map(movimientoProducto => {
@@ -38,11 +38,29 @@ export class MovimientosProductoService {
     );
   }
 
-  create(movimientoProducto: MovimientoProducto): Observable<any>{
+  create(movimientoProducto: MovimientoProducto): Observable<any> {
     return this.http.post<any>(`${this.url}/movimientos`, movimientoProducto).pipe(
       catchError(e => {
         Swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);
+      })
+    );
+  }
+
+  /********* INVENTARIO FORMATO PDF ***********/
+  getInventoryPDF(fechaIni: Date, fechaFin: Date): Observable<any> {
+    const headers = new HttpHeaders();
+    headers.append('Accept', 'application/pdf');
+    const requestOptions: any = { headers, responseType: 'blob' };
+
+    return this.http.post(`${this.url}/movimientos/inventario?fechaIni=${fechaIni.toString()}&fechaFin=${fechaFin.toString()}`,
+      '', requestOptions).pipe(
+
+      map((response: any) => {
+        return {
+          filename: 'inventario.pdf',
+          data: new Blob([response], { type: 'application/pdf' })
+        };
       })
     );
   }

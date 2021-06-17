@@ -57,8 +57,8 @@ export class FacturasComponent implements OnInit, AfterViewInit {
   getFacturas(): void {
     this.facturaService.getFacturas().subscribe(
       facturas => {
-        this.jQueryConfigs.configDataTable('facturas');
         this.facturas = facturas;
+        this.jQueryConfigs.configDataTable('facturas');
       }
     );
   }
@@ -110,5 +110,4 @@ export class FacturasComponent implements OnInit, AfterViewInit {
       }
     });
   }
-
 }

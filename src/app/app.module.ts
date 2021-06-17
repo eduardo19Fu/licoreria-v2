@@ -34,6 +34,7 @@ import { DetailUsuarioComponent } from './components/usuarios/detail-usuario/det
 import { ErrorComponent } from './components/error/error.component';
 import { MovimientosProductoComponent } from './components/movimientos-producto/movimientos-producto.component';
 import { CreateMovimientoComponent } from './components/movimientos-producto/create-movimiento/create-movimiento.component';
+import { BusquedaMovimientosComponent } from './components/movimientos-producto/busqueda-movimientos/busqueda-movimientos.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { CreateMovimientoComponent } from './components/movimientos-producto/cre
     DetailUsuarioComponent,
     ErrorComponent,
     MovimientosProductoComponent,
-    CreateMovimientoComponent
+    CreateMovimientoComponent,
+    BusquedaMovimientosComponent
   ],
   imports: [
     BrowserModule,
