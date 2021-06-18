@@ -51,7 +51,7 @@ export class FacturasComponent implements OnInit, AfterViewInit {
     this.getFacturas();
   }
 
-  ngAfterViewInit(): void{
+  ngAfterViewInit(): void {
   }
 
   getFacturas(): void {
@@ -63,12 +63,12 @@ export class FacturasComponent implements OnInit, AfterViewInit {
     );
   }
 
-  abrirDetalle(factura: Factura): void{
+  abrirDetalle(factura: Factura): void {
     this.facturaSeleccionada = factura;
     this.detailService.abrirModal();
   }
 
-  cancel(factura: Factura): void{
+  cancel(factura: Factura): void {
     this.swalWithBootstrapButtons.fire({
       title: '¿Está seguro?',
       text: `¿Seguro que desea anular la factura No. ${factura.noFactura}`,
@@ -109,5 +109,27 @@ export class FacturasComponent implements OnInit, AfterViewInit {
         );
       }
     });
+  }
+
+  printBill(factura: Factura): void {
+    const id = factura.idFactura;
+    this.facturaService.getBillPDF(id).subscribe(res => {
+      const url = window.URL.createObjectURL(res.data);
+      const a = document.createElement('a');
+      document.body.appendChild(a);
+      a.setAttribute('style', 'display: none');
+      a.setAttribute('target', 'blank');
+      a.href = url;
+      /*
+        opcion para pedir descarga de la respuesta obtenida
+        a.download = response.filename;
+      */
+      window.open(a.toString(), '_blank');
+      window.URL.revokeObjectURL(url);
+      a.remove();
+    },
+      error => {
+        console.log(error);
+      });
   }
 }

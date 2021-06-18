@@ -79,4 +79,19 @@ export class FacturaService {
       })
     );
   }
+
+  getSellsDaillyReportPDF(cajero: number, fecha: Date): Observable<any>{
+    const headers = new HttpHeaders();
+    headers.append('Accept', 'application/pdf');
+    const requestOptions: any = {headers, responseType: 'blob'};
+
+    return this.http.get<any>(`${this.url}/facturas/daily-sales?usuario=${cajero}&fecha=${fecha.toString()}`, requestOptions).pipe(
+      map((response: any) => {
+        return {
+          filename: 'poliza.pdf',
+          data: new Blob([response], {type: 'application/pdf'})
+        };
+      })
+    );
+  }
 }

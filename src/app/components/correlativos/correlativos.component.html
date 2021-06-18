@@ -60,20 +60,22 @@
                     <td>{{correlativo.usuario.usuario}}</td>
                     <td>
                         <span class="badge" 
-                            [ngClass]="{'badge-primary': correlativo.estado.estado === 'ACTIVO', 'badge-danger' : correlativo.estado.estado === 'INACTIVO'}">
+                            [ngClass]="{'badge-primary': correlativo.estado.estado === 'ACTIVO',
+                                'badge-danger' : correlativo.estado.estado === 'ANULADO',
+                                'badge-secondary' : correlativo.estado.estado === 'INACTIVO'}">
                             {{correlativo.estado.estado}}
                         </span>
                     </td>
                     <td *ngIf="authService.hasRole('ROLE_ADMIN')">
 
                         <button class="btn bg-gradient-info margin" name="edit" type="button"
-                            [routerLink]="['/correlativos/create', correlativo.idCorrelativo]">
+                            [routerLink]="['/facturas/correlativos/create', correlativo.idCorrelativo]">
                             <i class="fas fa-edit"></i>
                         </button>
 
                         <!-- Aquí va el botón de eliminar -->
                         <button class="btn bg-gradient-danger margin" name="delete"
-                            type="button" (click)="delete(cliente)">
+                            type="button" (click)="anularCorrelativo(correlativo)">
                             <i class="fas fa-ban"></i>
                         </button>
                     </td>

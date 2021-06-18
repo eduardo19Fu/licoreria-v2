@@ -68,6 +68,10 @@
                         </span>
                     </td>
                     <td class="center-options">
+                        <button class="btn bg-gradient-success" data-toggle="modal" (click)="abrirModal(producto)">
+                            <i class="fa fa-asterisk"></i>
+                        </button>
+
                         <button class="btn bg-gradient-info margin" [routerLink]="['/productos/create', producto.idProducto]">
                             <i class="fas fa-edit"></i>
                         </button>

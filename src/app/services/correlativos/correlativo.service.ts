@@ -71,8 +71,8 @@ export class CorrelativoService {
     );
   }
 
-  delete(id: number): Observable<Correlativo>{
-    return this.http.delete<Correlativo>(`${this.url}/correlativos/${id}`).pipe(
+  delete(id: number): Observable<any>{
+    return this.http.delete<any>(`${this.url}/correlativos/${id}`).pipe(
       catchError(e => {
         swal.fire(e.error.mensaje, e.error.error, 'error');
         return throwError(e);

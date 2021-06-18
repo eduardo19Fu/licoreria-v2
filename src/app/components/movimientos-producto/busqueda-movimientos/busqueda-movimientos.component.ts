@@ -23,7 +23,6 @@ export class BusquedaMovimientosComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('Fecha Inicial es: ' + this.fechaIni + ', Fecha Final es: ' + this.fechaFin);
     this.movimientosProductoService.getInventoryPDF(this.fechaIni, this.fechaFin).subscribe(response => {
       const url = window.URL.createObjectURL(response.data);
       const a = document.createElement('a');

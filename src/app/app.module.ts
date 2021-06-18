@@ -35,6 +35,7 @@ import { ErrorComponent } from './components/error/error.component';
 import { MovimientosProductoComponent } from './components/movimientos-producto/movimientos-producto.component';
 import { CreateMovimientoComponent } from './components/movimientos-producto/create-movimiento/create-movimiento.component';
 import { BusquedaMovimientosComponent } from './components/movimientos-producto/busqueda-movimientos/busqueda-movimientos.component';
+import { PolizaIndividualComponent } from './components/facturas/poliza-individual/poliza-individual.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { BusquedaMovimientosComponent } from './components/movimientos-producto/
     ErrorComponent,
     MovimientosProductoComponent,
     CreateMovimientoComponent,
-    BusquedaMovimientosComponent
+    BusquedaMovimientosComponent,
+    PolizaIndividualComponent
   ],
   imports: [
     BrowserModule,

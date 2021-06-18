@@ -14,12 +14,35 @@
                             <div class="col-sm">
 
                                 <ul *ngIf="producto" class="list-group mb-3">
-                                    <li class="list-group-item active">{{producto.codProducto}}</li>
-                                    <li class="list-group-item ">{{producto.nombre}}</li>
-                                    <li class="list-group-item">{{producto.tipoProducto.tipoProducto}}</li>
-                                    <li class="list-group-item">{{producto.marcaProducto.marca}}</li>
-                                    <li class="list-group-item">{{producto.marcaProducto.marca}}</li>
-                                    <li class="list-group-item">{{producto.marcaProducto.marca}}</li>
+                                    <li class="list-group-item active">Detalle</li>
+                                    <li class="list-group-item">
+                                        <strong>Código</strong>
+                                        {{producto.codProducto}}
+                                    </li>
+                                    <li class="list-group-item ">
+                                        <strong>Producto:</strong>
+                                        {{producto.nombre}}</li>
+                                    <li class="list-group-item">
+                                        <strong>Categoría:</strong>
+                                        {{producto.tipoProducto.tipoProducto}}</li>
+                                    <li class="list-group-item">
+                                        <strong>Marca:</strong>
+                                        {{producto.marcaProducto.marca}}</li>
+                                    <li class="list-group-item">
+                                        <strong>Precio Costo:</strong>
+                                        {{producto.precioCompra | currency: "Q" : "symbol"}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Precio Venta:</strong>
+                                        {{producto.precioVenta | currency: "Q" : "symbol"}}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Fecha Ingreso:</strong>
+                                        {{producto.fechaIngreso}}</li>
+                                    <li class="list-group-item">
+                                        <strong>Fecha Vencimiento:</strong>
+                                        {{producto.fechaVencimiento}}
+                                    </li>
                                 </ul>
 
                                 <div *ngIf="auth.hasRole('ROLE_ADMIN') || auth.hasRole('ROLE_INVENTARIO')"
