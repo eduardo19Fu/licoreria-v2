@@ -60,7 +60,7 @@ export class CreateUsuarioComponent implements OnInit {
 
     this.usuarioService.create(this.usuarioAuxiliar).subscribe(
       response => {
-        this.router.navigate(['/usuarios']);
+        this.router.navigate(['/usuarios/index']);
         swal.fire('Usuario creado', `El usuario ${this.usuarioAuxiliar.usuario} fue creado con éxito`, 'success');
       }
     );
@@ -69,7 +69,7 @@ export class CreateUsuarioComponent implements OnInit {
   update(): void {
     this.usuarioService.update(this.usuarioAuxiliar).subscribe(
       response => {
-        this.router.navigate(['/usuarios']);
+        this.router.navigate(['/usuarios/index']);
         swal.fire('Usuario Actualizado', `El usuario ${this.usuarioAuxiliar.usuario} fue actualizado con éxito`, 'success');
       }
     );

@@ -13,9 +13,13 @@ export class AuthService {
   // tslint:disable-next-line: variable-name
   private _token: string;
 
+  url: string;
+
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.url = 'https://dimsa-app2.herokuapp.com';
+  }
 
   public get usuario(): Usuario{
     if (this._usuario != null){
@@ -38,8 +42,9 @@ export class AuthService {
   }
 
   login(usuario: Usuario): Observable<any> {
-    const urlEndpoint = 'http://localhost:8281/oauth/token';
-    const credenciales = btoa('angularapp' + ':' + '12345');
+    const urlEndpoint = this.url + '/oauth/token';
+    // const credenciales = btoa('angularapp' + ':' + '12345');
+    const credenciales = btoa('angularapp' + ':' + 'pangosoftpuntodeventastore2021');
     // tslint:disable-next-line: object-literal-key-quotes
     const httpHeaders = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded', 'Authorization': 'Basic ' + credenciales });
 

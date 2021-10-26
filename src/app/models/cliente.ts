@@ -7,6 +7,7 @@ export class Cliente {
     nit: string;
     direccion: string;
     fechaRegistro: Date;
+    telefono: string;
 
     facturas: Factura[] = [];
 }

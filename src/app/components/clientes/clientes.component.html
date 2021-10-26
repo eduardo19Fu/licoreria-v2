@@ -38,6 +38,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>NIT</th>
+                    <th>Teléfono</th>
                     <th>Dirección</th>
                     <th>Fecha Registro</th>
                     <th *ngIf="auth.hasRole('ROLE_ADMIN') || auth.hasRole('ROLE_COBRADOR')">Opciones</th>
@@ -49,6 +50,7 @@
                     <td>{{cliente.idCliente}}</td>
                     <td>{{cliente.nombre}}</td>
                     <td>{{cliente.nit}}</td>
+                    <td>{{cliente.telefono}}</td>
                     <td>{{cliente.direccion}}</td>
                     <td>{{cliente.fechaRegistro | date: 'dd/MM/yyyy - hh:mm'}}</td>
                     <td *ngIf="auth.hasRole('ROLE_ADMIN') || auth.hasRole('ROLE_COBRADOR')" class="center-options">
@@ -74,6 +76,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>NIT</th>
+                    <th>Teléfono</th>
                     <th>Dirección</th>
                     <th>Fecha Registro</th>
                     <th *ngIf="auth.hasRole('ROLE_ADMIN') || auth.hasRole('ROLE_COBRADOR')">Opciones</th>
