@@ -18,8 +18,8 @@ export class DetailProductoComponent implements OnInit {
 
   @Input() producto: Producto;
 
-  imagenSeleccionada: File;
-  progreso: number;
+  public imagenSeleccionada: File;
+  public progreso: number;
 
   constructor(
     public modalService: ModalService,
@@ -77,6 +77,9 @@ export class DetailProductoComponent implements OnInit {
             this.modalService.notificarUpload.emit(this.producto);
             swal.fire('Imagen ha sido subida con éxito', response.mensaje, 'success');
           }
+        },
+        error => {
+          swal.fire(error.error.message, error.error.error, 'error');
         }
       );
     }

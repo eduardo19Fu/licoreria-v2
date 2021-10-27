@@ -14,6 +14,7 @@ export class Producto {
     fechaRegistro: Date;
     stock: number;
     imagen: string;
+    descripcion: string;
 
     tipoProducto: TipoProducto;
     marcaProducto: MarcaProducto;

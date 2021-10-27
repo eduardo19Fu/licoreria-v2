@@ -18,14 +18,14 @@ export class ProductosComponent implements OnInit, AfterViewInit {
   title: string;
   productos: Producto[];
 
-  productoSeleccionado: Producto;
+  public productoSeleccionado: Producto;
 
   paginador: any;
 
   jQueryConfigs: JqueryConfigs;
 
   constructor(
-    private modalService: ModalService,
+    public modalService: ModalService,
     private productoService: ProductoService,
     public auth: AuthService
   ) {
