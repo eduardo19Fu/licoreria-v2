@@ -1,5 +1,5 @@
 export const global = {
-    url : 'http://localhost:8281/api'
+    // url : 'http://localhost:8281/api'
     // url: 'https://dimsa-app2.herokuapp.com/api'
-    // url: 'https://dimsa-new.herokuapp.com/api'
+    url: 'https://dimsa-new.herokuapp.com/api'
 };
