@@ -1,4 +1,4 @@
-<app-detail-producto *ngIf="productoSeleccionado" [producto]="productoSeleccionado"></app-detail-producto>
+<!-- <app-detail-producto *ngIf="productoSeleccionado" [producto]="productoSeleccionado"></app-detail-producto> -->
 <!-- Content Header (Page header) -->
 <section class="content-header">
     <div class="container-fluid">
@@ -38,7 +38,6 @@
                     <th>Codigo</th>
                     <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Stock</th>
                     <th>Tipo</th>
                     <th>Marca</th>
                     <th>Estado</th>
@@ -76,7 +75,6 @@
                     <td>{{producto.codProducto}}</td>
                     <td>{{producto.nombre}}</td>
                     <td>{{producto.precioVenta}}</td>
-                    <td>{{producto.stock}}</td>
                     <td>{{producto.tipoProducto.tipoProducto}}</td>
                     <td>{{producto.marcaProducto.marca}}</td>
                     <td>
@@ -90,13 +88,11 @@
                             <i class="fa fa-asterisk"></i>
                         </button>
 
-                        <button class="btn bg-gradient-info margin" [routerLink]="['/productos/create', producto.idProducto]"
-                            *ngIf="auth.hasRole('ROLE_ADMIN') || auth.hasRole('ROLE_INVENTARIO')">
+                        <button class="btn bg-gradient-info margin" [routerLink]="['/productos/create', producto.idProducto]">
                             <i class="fas fa-edit"></i>
                         </button>
 
-                        <button class="btn bg-gradient-danger margin"
-                            *ngIf="auth.hasRole('ROLE_ADMIN') || auth.hasRole('ROLE_INVENTARIO')">
+                        <button class="btn bg-gradient-danger margin">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
@@ -109,7 +105,6 @@
                     <th>Codigo</th>
                     <th>Nombre</th>
                     <th>Precio</th>
-                    <th>Stock</th>
                     <th>Tipo</th>
                     <th>Marca</th>
                     <th>Estado</th>
@@ -119,4 +114,5 @@
         </table>
     </div>
 </div>
+
 

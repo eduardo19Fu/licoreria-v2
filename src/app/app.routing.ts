@@ -30,7 +30,7 @@ const appRoutes: Routes = [
     {path: 'home', component: HomeComponent, canActivate: [AuthGuard]},
 
     /****** MENUS DE PRODUCTOS ******/
-    {path: 'productos/index', component: ProductosComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
+    {path: 'productos/index', component: ProductosComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO', 'ROLE_COBRADOR']}},
     {path: 'productos/create', component: CreateProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
     {path: 'productos/create/:id', component: CreateProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},
     {path: 'productos/marcas/index', component: MarcasProductoComponent, canActivate: [AuthGuard, RoleGuard], data: {role: ['ROLE_ADMIN', 'ROLE_INVENTARIO']}},

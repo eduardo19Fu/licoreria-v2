@@ -36,6 +36,7 @@ import { MovimientosProductoComponent } from './components/movimientos-producto/
 import { CreateMovimientoComponent } from './components/movimientos-producto/create-movimiento/create-movimiento.component';
 import { BusquedaMovimientosComponent } from './components/movimientos-producto/busqueda-movimientos/busqueda-movimientos.component';
 import { PolizaIndividualComponent } from './components/facturas/poliza-individual/poliza-individual.component';
+import { SearchProductModalComponent } from './components/productos/search-product-modal/search-product-modal.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { PolizaIndividualComponent } from './components/facturas/poliza-individu
     MovimientosProductoComponent,
     CreateMovimientoComponent,
     BusquedaMovimientosComponent,
-    PolizaIndividualComponent
+    PolizaIndividualComponent,
+    SearchProductModalComponent
   ],
   imports: [
     BrowserModule,
