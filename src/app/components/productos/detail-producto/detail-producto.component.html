@@ -28,7 +28,7 @@
                                     <li class="list-group-item">
                                         <strong>Marca:</strong>
                                         {{producto.marcaProducto.marca}}</li>
-                                    <li class="list-group-item">
+                                    <li *ngIf="!auth.hasRole('ROLE_COBRADOR')" class="list-group-item">
                                         <strong>Precio Costo:</strong>
                                         {{producto.precioCompra | currency: "Q" : "symbol"}}
                                     </li>

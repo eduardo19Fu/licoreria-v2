@@ -56,8 +56,6 @@ export class CreateUsuarioComponent implements OnInit {
   create(): void {
     this.usuarioAuxiliar.roles = this.filas;
 
-    console.log(this.usuarioAuxiliar);
-
     this.usuarioService.create(this.usuarioAuxiliar).subscribe(
       response => {
         this.router.navigate(['/usuarios/index']);

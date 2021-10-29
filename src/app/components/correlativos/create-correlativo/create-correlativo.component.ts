@@ -54,7 +54,7 @@ export class CreateCorrelativoComponent implements OnInit {
   create(): void{
     this.correlativoService.create(this.correlativo).subscribe(
       response => {
-        this.router.navigate(['/correlativos/index']);
+        this.router.navigate(['/facturas/correlativos/index']);
         swal.fire('Correlativo Creado', `${response.mensaje}`, 'success');
       }
     );
@@ -63,7 +63,7 @@ export class CreateCorrelativoComponent implements OnInit {
   update(): void{
     this.correlativoService.update(this.correlativo).subscribe(
       response => {
-        this.router.navigate(['/correlativos/index']);
+        this.router.navigate(['/facturas/correlativos/index']);
         swal.fire('Correlativo Actualizado', `${response.mensaje}: ${response.correlativo.idCorrelativo}`, 'success');
       }
     );
