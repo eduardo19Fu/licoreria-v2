@@ -128,8 +128,17 @@
                         <div class="row">
                             <div class="col">
                                 <label for="descripcion">Descripción</label>
-                                <textarea class="form-control" name="descripcion" id="descripcion" [(ngModel)]="producto.descripcion"
+                                <textarea class="form-control" name="descripcion" id="descripcion" placeholder="Ingrese una descripción"
+                                    [(ngModel)]="producto.descripcion"
                                     cols="30" rows="5"></textarea>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col">
+                                <label for="descripcion">Enlace al Sitio Web</label>
+                                <input type="text" name="link" id="link" class="form-control" placeholder="Ingrese link del sitio oficial"
+                                    [(ngModel)]="producto.link">
                             </div>
                         </div>
                     </div>

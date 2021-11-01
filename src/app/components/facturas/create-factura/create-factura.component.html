@@ -1,21 +1,24 @@
 <!-- MODAL DE REGISTRO PARA CLIENTES -->
 <app-modal-create *ngIf="nitIngresado" [nit]="nitIngresado" (clienteCreado)="cargarCliente($event)"></app-modal-create>
 
+<!-- MODAL CALCULAR CAMBIO -->
+<app-modal-cambio *ngIf="pagar" [factura]="factura"></app-modal-cambio>
 
-<div class="container">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">{{title}}</h1>
-                </div><!-- /.col -->
-            </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">{{title}}</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
 
-    <div class="col-md-12">
+<div class="row">
+
+    <div class="col-md-9">
         <div class="card card-primary">
             <div class="card-header">
                 <h3 class="card-title">Ingrese los datos</h3>
@@ -51,7 +54,7 @@
 
                         <div class="col">
                             <label for="buscar" style="display: block;">Buscar</label>
-                            <input type="text" id="buscar" name="buscar" class="form-control" 
+                            <input type="text" id="buscar" name="buscar" class="form-control"
                                 style="width: 70%; display: inline; margin-right: 10px;" autofocus>
 
                             <button type="submit" role="button" class="btn bg-fuchsia" (click)="buscarCliente()">
@@ -64,15 +67,15 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="nit">NIT:</label>
-                                <input type="text" class="form-control" name="nit" value="{{cliente ? cliente.nit : ''}}"
-                                    disabled>
+                                <input type="text" class="form-control" name="nit"
+                                    value="{{cliente ? cliente.nit : ''}}" disabled>
                             </div>
                         </div>
                         <div class="col">
                             <div class="form-group">
                                 <label for="nombre">Nombre:</label>
-                                <input type="text" class="form-control" name="nombre" value="{{cliente ? cliente.nombre : ''}}"
-                                    disabled>
+                                <input type="text" class="form-control" name="nombre"
+                                    value="{{cliente ? cliente.nombre : ''}}" disabled>
                             </div>
                         </div>
                     </div>
@@ -81,21 +84,21 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="direccion">Dirección:</label>
-                                <input type="text" class="form-control" name="direccion" value="{{cliente ? cliente.direccion : ''}}"
-                                    disabled>
+                                <input type="text" class="form-control" name="direccion"
+                                    value="{{cliente ? cliente.direccion : ''}}" disabled>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    
+
                     <div class="row">
                         <div class="col-md-auto">
                             <div class="form-group">
                                 <label for="codigo" style="display: block;">Codigo</label>
-                                <input type="text" class="form-control" name="codigo" id="codigo" 
+                                <input type="text" class="form-control" name="codigo" id="codigo"
                                     value="{{producto ? producto.codProducto : ''}}"
                                     style="width: 70%; display: inline; margin-right: 10px;" (blur)="buscarProducto()">
-                                
+
                                 <button class="btn bg-gradient-fuchsia" (click)="buscarProducto()">
                                     <i class="fas fa-search"></i>
                                 </button>
@@ -118,8 +121,8 @@
                         <div class="col">
                             <div class="form-group">
                                 <label for="nombre">Producto</label>
-                                <input type="text" class="form-control" name="nombre" value="{{producto ? producto.nombre : ''}}"
-                                    [disabled]="producto.nombre">
+                                <input type="text" class="form-control" name="nombre"
+                                    value="{{producto ? producto.nombre : ''}}" [disabled]="producto.nombre">
                                 <!--
                                 <mat-form-field class="busqueda">
                                     <mat-label>Producto</mat-label>
@@ -139,7 +142,7 @@
                         <div class="col-sm-2">
                             <div class="form-group">
                                 <label for="cantidad" style="display: block;">Cantidad</label>
-                                <input type="number" name="cantidad" id="cantidad" class="form-control" 
+                                <input type="number" name="cantidad" id="cantidad" class="form-control"
                                     style="width: 65%; display: inline; margin-right: 10px;" value="0">
 
                                 <button class="btn bg-gradient-cyan" (click)="agregarLinea()">
@@ -167,7 +170,7 @@
                                 <td>{{item.producto.nombre}}</td>
                                 <td>{{item.producto.precioVenta | currency: "Q" : "symbol"}}</td>
                                 <td>
-                                    <input type="number" value="{{item.cantidad}}" class="form-control col-sm-4" 
+                                    <input type="number" value="{{item.cantidad}}" class="form-control col-sm-4"
                                         (change)="actualizarCantidad(item.producto.idProducto, $event)">
                                 </td>
                                 <td>{{item.calcularImporte() | currency: "Q" : "symbol"}}</td>
@@ -180,9 +183,9 @@
                         </tbody>
                     </table>
                     <br>
-                    <h5 class="float-right">
+                    <!-- <h5 class="float-right">
                         Total: <span>{{factura.calcularTotal() | currency: "Q": "symbol"}}</span>
-                    </h5>
+                    </h5> -->
                 </div>
                 <!-- /.card-body -->
                 <div class="card-footer">
@@ -192,5 +195,32 @@
             </form>
         </div>
         <!-- /.card -->
+    </div>
+
+    <div class="col-md-3">
+        <div class="card card-fuchsia">
+            <div class="card-header">
+                <h3 class="card-title">Calculo de Cambio y Total</h3>
+            </div>
+            <div class="card-body">
+                <h4>
+                    Total: <span><strong>{{factura.calcularTotal() | currency: "Q": "symbol"}}</strong></span>
+                </h4>
+                <form action="">
+                    <div class="form-group">
+                        <label for="efectivo">Efectivo:</label>
+                        <input type="number" name="efectivo" id="efectivo" class="form-control" (keyup)="calcularCambio($event)"
+                         [(ngModel)]="efectivo">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="">Cambio:</label>
+                        <h3>
+                            <span><strong>{{cambio | currency: "Q":"symbol"}}</strong></span>
+                        </h3>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

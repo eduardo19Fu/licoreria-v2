@@ -16,6 +16,7 @@ import { ProductoService } from 'src/app/services/producto.service';
 import { UsuarioService } from 'src/app/services/usuarios/usuario.service';
 
 import swal from 'sweetalert2';
+import { ModalCambioService } from '../../../services/facturas/modal-cambio.service';
 
 @Component({
   selector: 'app-create-factura',
@@ -26,12 +27,16 @@ export class CreateFacturaComponent implements OnInit {
 
   title: string;
   nitIngresado: string;
+  pagar = false;
 
   producto: Producto;
   cliente: Cliente;
   usuario: UsuarioAuxiliar;
   factura: Factura;
   correlativo: Correlativo;
+
+  efectivo: number;
+  cambio = 0.00;
 
   /* AutomComplete
   autocompleteControl = new FormControl();
@@ -45,6 +50,7 @@ export class CreateFacturaComponent implements OnInit {
     private clienteService: ClienteService,
     private usuarioService: UsuarioService,
     private clienteCreateService: ClienteCreateService,
+    private modalCambioService: ModalCambioService,
     private correlativoService: CorrelativoService,
     public authService: AuthService
   ) {
@@ -230,6 +236,9 @@ export class CreateFacturaComponent implements OnInit {
     this.factura.usuario = this.usuario;
     this.factura.total = this.factura.calcularTotal();
 
+    // this.pagar = true;
+    // this.modalCambioService.abrirModal();
+
     this.facturaService.create(this.factura).subscribe(
       response => {
         this.cliente = new Cliente();
@@ -259,6 +268,14 @@ export class CreateFacturaComponent implements OnInit {
         });
       }
     );
+  }
+
+  calcularCambio(event): void{
+    if (this.efectivo){
+      this.cambio = this.efectivo - this.factura.calcularTotal();
+    }else{
+      this.cambio = 0.00;
+    }
   }
 
 }

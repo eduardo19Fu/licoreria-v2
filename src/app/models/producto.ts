@@ -15,6 +15,7 @@ export class Producto {
     stock: number;
     imagen: string;
     descripcion: string;
+    link: string;
 
     tipoProducto: TipoProducto;
     marcaProducto: MarcaProducto;
