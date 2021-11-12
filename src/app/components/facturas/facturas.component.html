@@ -59,7 +59,7 @@
                     <td>{{factura.idFactura}}</td>
                     <td>{{factura.noFactura}}</td>
                     <td>{{factura.fecha | date: 'dd/MM/yyyy - hh:mm'}}</td>
-                    <td>{{factura.total}}</td>
+                    <td>{{factura.total | currency: 'Q' : 'symbol'}}</td>
                     <td>
                         <span class="badge" 
                             [ngClass]="{'badge-success': factura.estado.idEstado === 3, 'badge-danger': factura.estado.idEstado === 4}">

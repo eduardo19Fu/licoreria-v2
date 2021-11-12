@@ -25,7 +25,7 @@
                                     </li>
                                     <li class="list-group-item">
                                         <strong>TOTAL: </strong>
-                                        {{factura.total}}
+                                        {{factura.total | currency: "Q" : "symbol"}}
                                     </li>
                                     <li class="list-group-item">
                                         <strong>FECHA EMISIÓN: </strong>
@@ -55,6 +55,8 @@
                                         <th>Producto</th>
                                         <th>Cantidad</th>
                                         <th>SubTotal</th>
+                                        <th>Descuento</th>
+                                        <th>Descuento Aplicado</th>
                                     </tr>
                                 </thead>
 
@@ -63,7 +65,9 @@
                                         <td>{{item.idDetalle}}</td>
                                         <td>{{item.producto.nombre}}</td>
                                         <td>{{item.cantidad}}</td>
-                                        <td>{{item.subTotal}}</td>
+                                        <td>{{item.subTotal | currency : "Q" : "symbol"}}</td>
+                                        <td>{{item.descuento + '%'}}</td>
+                                        <td>{{item.subTotalDescuento | currency: "Q" : "symbol"}}</td>
                                     </tr>
                                 </tbody>
                             </table>

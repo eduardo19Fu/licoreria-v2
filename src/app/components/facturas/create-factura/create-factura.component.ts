@@ -38,12 +38,6 @@ export class CreateFacturaComponent implements OnInit {
   efectivo: number;
   cambio = 0.00;
 
-  /* AutomComplete
-  autocompleteControl = new FormControl();
-  productos: string[] = ['One', 'Two', 'Three'];
-  productosFiltrados: Observable<string[]>;
-  */
-
   constructor(
     private facturaService: FacturaService,
     private productoService: ProductoService,
@@ -69,24 +63,7 @@ export class CreateFacturaComponent implements OnInit {
         this.cargarCorrelativo();
       }
     );
-
-    // this.usuario = this.authService.usuario;
-    // this.cargarCorrelativo();
-
-    /* AutoComplete
-    this.productosFiltrados = this.autocompleteControl.valueChanges
-      .pipe(
-        startWith(''),
-        map(value => this._filter(value))
-      );*/
   }
-
-  /* AutoComplete
-  private _filter(value: string): string[] {
-    const filterValue = value.toLowerCase();
-
-    return this.productos.filter(option => option.toLowerCase().includes(filterValue));
-  }*/
 
   buscarCliente(): void {
     const nit = ((document.getElementById('buscar') as HTMLInputElement)).value;
@@ -160,6 +137,7 @@ export class CreateFacturaComponent implements OnInit {
         const item = new DetalleFactura();
 
         item.cantidad = +((document.getElementById('cantidad') as HTMLInputElement)).value; // valor obtenido del formulario de cantidad
+        item.descuento = 0; // valor obtenido del input de descuento
 
         if (item.cantidad > this.producto.stock) {
           swal.fire('Stock Insuficiente', 'No existen las suficientes existencias de este producto.', 'warning');
@@ -172,6 +150,7 @@ export class CreateFacturaComponent implements OnInit {
               (document.getElementById('cantidad') as HTMLInputElement).value = '';
             } else {
               item.producto = this.producto;
+              item.subTotalDescuento = item.calcularImporte();
               item.subTotal = item.calcularImporte();
               this.factura.itemsFactura.push(item);
               this.producto = new Producto();
@@ -198,7 +177,23 @@ export class CreateFacturaComponent implements OnInit {
           swal.fire('Stock Insuficiente', 'No existen las suficientes existencias de este producto.', 'warning');
         } else {
           item.cantidad = cantidad;
+          item.subTotal = item.calcularImporte();
+          item.subTotalDescuento = item.calcularImporteDescuento();
         }
+      }
+
+      return item;
+    });
+  }
+
+  actualizarCantidadDescuento(idProducto: number, event: any): void {
+    const descuento = event.target.value as number;
+
+    this.factura.itemsFactura = this.factura.itemsFactura.map((item: DetalleFactura) => {
+      if (idProducto === item.producto.idProducto) {
+        item.descuento = descuento;
+        item.subTotal = item.calcularImporte();
+        item.subTotalDescuento = item.calcularImporteDescuento();
       }
 
       return item;
@@ -219,6 +214,8 @@ export class CreateFacturaComponent implements OnInit {
     this.factura.itemsFactura = this.factura.itemsFactura.map((item: DetalleFactura) => {
       if (idProducto === item.producto.idProducto) {
         item.cantidad = item.cantidad + cantidad;
+        item.subTotal = item.calcularImporte();
+        item.subTotalDescuento = item.calcularImporteDescuento();
       }
 
       return item;
@@ -234,10 +231,8 @@ export class CreateFacturaComponent implements OnInit {
     this.factura.serie = this.correlativo.serie;
     this.factura.cliente = this.cliente;
     this.factura.usuario = this.usuario;
+    console.log(this.factura.itemsFactura);
     this.factura.total = this.factura.calcularTotal();
-
-    // this.pagar = true;
-    // this.modalCambioService.abrirModal();
 
     this.facturaService.create(this.factura).subscribe(
       response => {
@@ -247,6 +242,8 @@ export class CreateFacturaComponent implements OnInit {
         (document.getElementById('buscar') as HTMLInputElement).value = '';
         swal.fire('Venta Realizada', `Factura No. ${response.factura.noFactura} creada con éxito!`, 'success');
         (document.getElementById('buscar') as HTMLInputElement).focus();
+        this.cambio = 0;
+        (document.getElementById('efectivo') as HTMLInputElement).value = '';
 
         this.facturaService.getBillPDF(response.factura.idFactura).subscribe(res => {
           const url = window.URL.createObjectURL(res.data);
@@ -263,17 +260,17 @@ export class CreateFacturaComponent implements OnInit {
           window.URL.revokeObjectURL(url);
           a.remove();
         },
-        error => {
-          console.log(error);
-        });
+          error => {
+            console.log(error);
+          });
       }
     );
   }
 
-  calcularCambio(event): void{
-    if (this.efectivo){
+  calcularCambio(event): void {
+    if (this.efectivo) {
       this.cambio = this.efectivo - this.factura.calcularTotal();
-    }else{
+    } else {
       this.cambio = 0.00;
     }
   }

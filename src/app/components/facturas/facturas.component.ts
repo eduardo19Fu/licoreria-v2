@@ -83,6 +83,7 @@ export class FacturasComponent implements OnInit, AfterViewInit {
         // aqui va el codigo de confirmación para anular factura
         this.facturaService.cancel(factura.idFactura, this.usuario.idUsuario).subscribe(
           response => {
+            factura.estado = response.factura.estado;
             this.swalWithBootstrapButtons.fire(
               `${response.mensaje}`,
               `La factura No. ${factura.noFactura} ha sido anulada con éxito`,
@@ -90,13 +91,6 @@ export class FacturasComponent implements OnInit, AfterViewInit {
             );
           }
         );
-
-        this.facturas.map(facturaVieja => {
-          if (facturaVieja.idFactura === factura.idFactura) {
-            facturaVieja.estado = factura.estado;
-          }
-          return factura;
-        });
 
       } else if (
         /* Read more about handling dismissals below */

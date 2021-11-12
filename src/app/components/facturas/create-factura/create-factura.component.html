@@ -102,19 +102,7 @@
                                 <button class="btn bg-gradient-fuchsia" (click)="buscarProducto()">
                                     <i class="fas fa-search"></i>
                                 </button>
-                                <!--
-                                <mat-form-field class="busqueda">
-                                    <mat-label>Producto</mat-label>
-                                    <input type="text" placeholder="Código" aria-label="Number" matInput
-                                        [formControl]="autocompleteControl" [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let producto of productosFiltrados | async"
-                                            [value]="producto">
-                                            {{producto.nombre}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </mat-form-field>
-                                -->
+                                
                             </div>
                         </div>
 
@@ -123,19 +111,7 @@
                                 <label for="nombre">Producto</label>
                                 <input type="text" class="form-control" name="nombre"
                                     value="{{producto ? producto.nombre : ''}}" [disabled]="producto.nombre">
-                                <!--
-                                <mat-form-field class="busqueda">
-                                    <mat-label>Producto</mat-label>
-                                    <input type="text" placeholder="Código" aria-label="Number" matInput
-                                        [formControl]="autocompleteControl" [matAutocomplete]="auto">
-                                    <mat-autocomplete #auto="matAutocomplete">
-                                        <mat-option *ngFor="let producto of productosFiltrados | async"
-                                            [value]="producto">
-                                            {{producto.nombre}}
-                                        </mat-option>
-                                    </mat-autocomplete>
-                                </mat-form-field>
-                                -->
+                                
                             </div>
                         </div>
 
@@ -161,6 +137,7 @@
                                 <th>Producto</th>
                                 <th>Precio</th>
                                 <th>Cantidad</th>
+                                <th>Descuento</th>
                                 <th>Total</th>
                             </tr>
                         </thead>
@@ -170,10 +147,15 @@
                                 <td>{{item.producto.nombre}}</td>
                                 <td>{{item.producto.precioVenta | currency: "Q" : "symbol"}}</td>
                                 <td>
-                                    <input type="number" value="{{item.cantidad}}" class="form-control col-sm-4"
+                                    <input type="number" id="cant" value="{{item.cantidad}}" class="form-control col-sm-6"
                                         (change)="actualizarCantidad(item.producto.idProducto, $event)">
                                 </td>
-                                <td>{{item.calcularImporte() | currency: "Q" : "symbol"}}</td>
+                                <td>
+                                    <input type="number" id="descuento" name="descuento" value="{{item.descuento}}" 
+                                        class="form-control col-sm-6" (change)="actualizarCantidadDescuento(item.producto.idProducto, $event)">
+                                </td>
+                                <!-- <td>{{item.calcularImporte() | currency: "Q" : "symbol"}}</td> -->
+                                <td>{{item.subTotalDescuento | currency: "Q" : "symbol"}}</td>
                                 <td>
                                     <button type="button" class="btn bg-gradient-danger" (click)="eliminarItem(i)">
                                         X
@@ -188,10 +170,10 @@
                     </h5> -->
                 </div>
                 <!-- /.card-body -->
-                <div class="card-footer">
+                <!-- <div class="card-footer">
                     <input type="submit" role="button" class="btn btn-primary" value="Guardar"
                         [disabled]="!cliente.idCliente || (factura.itemsFactura.length <= 0)" (click)="createFactura()">
-                </div>
+                </div> -->
             </form>
         </div>
         <!-- /.card -->
@@ -220,6 +202,11 @@
                         </h3>
                     </div>
                 </form>
+            </div>
+
+            <div class="card-footer">
+                <input type="submit" role="button" class="btn btn-primary" value="Pagar"
+                        [disabled]="!cliente.idCliente || (factura.itemsFactura.length <= 0)" (click)="createFactura()">
             </div>
         </div>
     </div>
