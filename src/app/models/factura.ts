@@ -18,7 +18,7 @@ export class Factura {
     calcularTotal(): number{
         this.total = 0;
         this.itemsFactura.forEach((item: DetalleFactura) => {
-            this.total += item.calcularImporte();
+            this.total += item.calcularImporteDescuento();
         });
 
         return this.total;
