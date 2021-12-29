@@ -83,8 +83,8 @@
                 </li>
 
                 <!-- MENUS DE FACTURAS -->
-                <li class="nav-header" *ngIf="!authService.hasRole('ROLE_INVENTARIO')">Ventas</li>
-                <li class="nav-item" *ngIf="!authService.hasRole('ROLE_INVENTARIO')"
+                <li class="nav-header" *ngIf="authService.hasRole('ROLE_COBRADOR') || authService.hasRole('ROLE_ADMIN')">Ventas</li>
+                <li class="nav-item" *ngIf="authService.hasRole('ROLE_COBRADOR') || authService.hasRole('ROLE_ADMIN')"
                     [ngClass]="{'menu-open': router.url.startsWith('/facturas')}">
                     <a href="" class="nav-link" [ngClass]="{'active': router.url.startsWith('/facturas')}">
                         <i class="fas fa-money-bill nav-icon"></i>
@@ -112,8 +112,8 @@
                 </li><!-- MENU DE FACTURAS FINAL -->
 
                 <!-- MENU DE CLIENTES -->
-                <li class="nav-header" *ngIf="!authService.hasRole('ROLE_INVENTARIO')">Clientes</li>
-                <li class="nav-item" *ngIf="!authService.hasRole('ROLE_INVENTARIO')">
+                <li class="nav-header" *ngIf="authService.hasRole('ROLE_COBRADOR') || authService.hasRole('ROLE_ADMIN')">Clientes</li>
+                <li class="nav-item" *ngIf="authService.hasRole('ROLE_COBRADOR') || authService.hasRole('ROLE_ADMIN')">
                     <a [routerLink]="['/clientes/index']" class="nav-link" [ngClass]="{'active' : router.url.startsWith('/clientes')}">
                         <i class="nav-icon fas fa-street-view"></i>
                         <p>Clientes</p>
