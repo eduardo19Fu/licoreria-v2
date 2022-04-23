@@ -19,8 +19,8 @@ export class AuthService {
     private http: HttpClient
   ) {
     // this.url = 'https://dimsa-app2.herokuapp.com';
-    // this.url = 'http://localhost:8281';
-    this.url = 'https://dimsa-new.herokuapp.com';
+    this.url = 'http://localhost:8281';
+    // this.url = 'https://dimsa-new.herokuapp.com';
   }
 
   public get usuario(): Usuario{
